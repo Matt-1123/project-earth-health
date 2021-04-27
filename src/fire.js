@@ -1,6 +1,7 @@
 import firebase from "firebase";
 
 var firebaseConfig = {
+  // apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   apiKey: "AIzaSyAKGezN4EiW-RwA536x2Mzm83MRzbpBA-I",
   authDomain: "project-earth-health.firebaseapp.com",
   projectId: "project-earth-health",
