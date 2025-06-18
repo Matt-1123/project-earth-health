@@ -5,6 +5,8 @@ import React, {
   useRef,
   useContext,
 } from "react";
+import { NavLink } from 'react-router-dom';
+import logo from '../assets/logos/logo-project-earth-health.png'
 // import PropTypes from "prop-types";
 // import { Link } from "react-router-dom";
 // import AuthContext from "../../../context/auth/authContext";
@@ -17,7 +19,7 @@ import React, {
 // import logo from "../../../assets/logos/logo-project-earth-health.png";
 // import "./Navbar.css";
 
-const Navbar = ({ title }) => {
+const Navbar = ({ prop1, prop2 }) => {
 //   const authContext = useContext(AuthContext);
 
 //   const { isAuthenticated, logout, user } = authContext;
@@ -83,13 +85,15 @@ const Navbar = ({ title }) => {
 
   return (
     <Fragment>
-      <header className="navbar bg-primary--dark pt">
-        <div className="container">
-          {/* <Link to="/">
-            <img src={logo} alt="Project Earth Health" />
-          </Link> */}
-
+      <header className="bg-primary--dark pt">
+        <div className="container navbar grid-2">
+          <NavLink to="/">
+            <img src={logo} alt="Project Earth Health" style={{ width: "auto", height: "48px" }} />
+          </NavLink>
           <div className="navbar-right">
+            <NavLink to="/about">
+              About
+            </NavLink>
             {/* <button
               ref={addActionBtnRef}
               onClick={handleOpenActionMenu}

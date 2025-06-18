@@ -536,6 +536,14 @@ table th {
   background: var(--light-color);
 }
 
+/* ------------ Navbar ------------*/
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 2rem;
+}
+
 /* .navbar {
   display: flex;
   justify-content: space-between;
