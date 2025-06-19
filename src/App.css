@@ -270,6 +270,9 @@ img {
 .my-3 {
   margin: 3rem 0;
 }
+.my-3-auto {
+  margin: 3rem auto;
+}
 .mt {
   margin-top: 0.5rem 0 0 0;
 }
@@ -319,6 +322,18 @@ img {
 /* Flex */
 .flex {
   display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-items {
+  align-items: center;
 }
 
 /* Grid */
