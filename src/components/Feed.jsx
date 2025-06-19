@@ -1,9 +1,10 @@
 import React from 'react'
+import CleanupFeedItem from './CleanupFeedItem'
 
 const Feed = () => {
   return (
     <>
-      <p>Feed</p>
+      <CleanupFeedItem />
     </>
   )
 }
