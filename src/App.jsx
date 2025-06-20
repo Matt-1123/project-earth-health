@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom';
 import MainLayout from './components/layouts/MainLayout';
 import Homepage from './components/pages/Homepage';
-import About from './components/pages/About'
+import AboutPage from './components/pages/AboutPage'
+import MyProfilePage from './components/pages/MyProfilePage';
 import NotFoundPage from './components/pages/NotFoundPage';
 
 const App = () => {
@@ -15,7 +16,8 @@ const App = () => {
     createRoutesFromElements(
       <Route path='/' element={<MainLayout />}>
         <Route index element={<Homepage />} />
-        <Route path='/about' element={<About />} />
+        <Route path='/about' element={<AboutPage />} />
+        <Route path='/profile' element={<MyProfilePage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Route>
     )

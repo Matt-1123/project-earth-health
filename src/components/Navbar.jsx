@@ -91,8 +91,14 @@ const Navbar = ({ prop1, prop2 }) => {
             <img src={logo} alt="Project Earth Health" style={{ width: "auto", height: "48px" }} />
           </NavLink>
           <div className="navbar-right">
+            <NavLink to="/">
+              Home
+            </NavLink>
             <NavLink to="/about">
               About
+            </NavLink>
+            <NavLink to="/profile">
+              My Profile
             </NavLink>
             {/* <button
               ref={addActionBtnRef}

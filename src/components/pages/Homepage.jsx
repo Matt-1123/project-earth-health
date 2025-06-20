@@ -1,6 +1,5 @@
 import React from 'react'
 import Feed from '../Feed'
-import { FaMapMarker } from 'react-icons/fa'
 import '../../App.css'
 import cleanups from '../../../cleanups.json'
 

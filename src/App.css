@@ -585,6 +585,10 @@ table th {
   color: var(--light-color);
 }
 
+.navbar .active {
+  border-bottom: 2px solid var(--light-color)
+}
+
 .navbar .welcome span {
   margin-right: 0.6rem;
 }
