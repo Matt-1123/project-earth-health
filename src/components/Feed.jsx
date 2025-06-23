@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import CleanupFeedItem from './CleanupFeedItem'
+import Spinner from './Spinner'
 
 const Feed = () => {
   const [cleanups, setCleanups] = useState([])
   const [loading, setLoading] = useState(true);
 
+  // fetch data when component renders
   useEffect(() => {
     const fetchCleanups = async () => {
       // const apiUrl = '/api/cleanups';
@@ -27,7 +29,7 @@ const Feed = () => {
 
   return (
     <>
-      {loading ? (<h2>Loading...</h2>) : (
+      {loading ? (<Spinner loading={loading}/>) : (
         cleanups.map((cleanup) => (
           <CleanupFeedItem key={cleanup.id} action={cleanup} />
         ))
