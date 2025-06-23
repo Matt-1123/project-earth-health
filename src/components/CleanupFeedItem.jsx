@@ -2,7 +2,10 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import { FaEdit, FaTrash, FaEllipsisH } from 'react-icons/fa'
 
-const CleanupFeedItem = () => {
+const CleanupFeedItem = ({ action }) => {
+  console.log(JSON.stringify(action))
+  const { title, date, userName, description, groupSize, location, environmentType, totalItems, totalBags } = action;
+  
   return (
     <div className="card bg-dark feed-item">
       <div
@@ -13,8 +16,8 @@ const CleanupFeedItem = () => {
       >
         <img src="" alt="" style={styles.avatar} />
         <div style={styles.meta}>
-          <p className="font-sm">Matt Russo</p>
-          <p className="font-sm">June 19, 2025</p>
+          <p className="font-sm">{userName}</p>
+          <p className="font-sm">{date}</p>
           {/* <p className="font-sm">{username}</p>
           <p className="font-sm">{dateConverter(date)}</p> */}
         </div>
@@ -26,15 +29,17 @@ const CleanupFeedItem = () => {
           <button style={{ marginRight: "10px" }}>
             <FaEdit style={{ color: "#999" }} />
           </button>
-          <NavLink to="/" style={{ marginRight: "10px" }}>
-            <FaTrash style={{ color: "#dc3545" }} />
-          </NavLink>
+          <button>
+            <NavLink to="/" style={{ marginRight: "10px" }}>
+              <FaTrash style={{ color: "#dc3545" }} />
+            </NavLink>
+          </button>
+          <button style={{ height: "1rem" }} onClick={console.log('button clicked')}>
+            <FaEllipsisH
+              style={{ color: "#555", justifySelf: "end" }}
+            />
+          </button>
         </div>
-        <button style={{ height: "1rem" }} onClick={console.log('button clicked')}>
-          <FaEllipsisH
-            style={{ color: "#555", justifySelf: "end" }}
-          />
-        </button>
       </div>
       <div
         className="flex"
@@ -46,27 +51,38 @@ const CleanupFeedItem = () => {
           className="font-md ml-1 title"
           style={{ cursor: "pointer" }}
         >
-          {/* {title} */}
-          Carroll Path Cleanup
+          {title}
         </h3>
       </div>
       
         <p className="font-sm" style={{ marginBottom: ".5em" }}>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis nisi id autem explicabo exercitationem perspiciatis.
+          {description}
         </p>
       <div style={styles.stats}>
         <div className="text-primary mr">
           <p className="font-sm">
             Total weight collected
           </p>
-          <p className="font-lg" style={{ lineHeight: "1", marginBottom: "0" }}>
+          <p className="font-md" style={{ lineHeight: "1", marginBottom: "0" }}>
             3 lbs.
           </p>
         </div>
         <div className="mr">
           <p className="font-sm">Environment Type</p>
-          <p className="font-md">
-            Nature path
+          <p>
+            {environmentType}
+          </p>
+        </div>
+        <div className="mr">
+          <p className="font-sm">Location</p>
+          <p>
+            {location}
+          </p>
+        </div>
+        <div className="mr">
+          <p className="font-sm">Group Size</p>
+          <p>
+            {groupSize}
           </p>
         </div>
       </div>

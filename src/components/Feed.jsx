@@ -28,7 +28,9 @@ const Feed = () => {
   return (
     <>
       {loading ? (<h2>Loading...</h2>) : (
-        <CleanupFeedItem />
+        cleanups.map((cleanup) => (
+          <CleanupFeedItem key={cleanup.id} action={cleanup} />
+        ))
       )}
     </>
   )

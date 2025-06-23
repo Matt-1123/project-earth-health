@@ -3,6 +3,7 @@
         {
             "userId": 1,
             "id": 1,
+            "userName": "Matt Russo",
             "title": "Community Cleanup",
             "date": "06172025",
             "groupSize": 1,
@@ -12,6 +13,7 @@
         {
             "userId": 1,
             "id": 2,
+            "userName": "John Doe",
             "title": "Community Cleanup",
             "date": "06172025",
             "groupSize": 1,
@@ -21,6 +23,7 @@
         {
             "userId": 2,
             "id": 3,
+            "userName": "Matt Russo",
             "title": "Community Cleanup",
             "date": "06172025",
             "groupSize": 1,
@@ -30,6 +33,7 @@
         {
             "userId": 1,
             "id": 4,
+            "userName": "John Doe",
             "title": "Community Cleanup",
             "date": "06172025",
             "groupSize": 1,
@@ -39,6 +43,7 @@
         {
             "userId": 3,
             "id": 5,
+            "userName": "Matt Russo",
             "title": "Community Cleanup",
             "date": "06172025",
             "groupSize": 1,
