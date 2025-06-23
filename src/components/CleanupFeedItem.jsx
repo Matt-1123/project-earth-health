@@ -1,10 +1,10 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash, FaEllipsisH } from 'react-icons/fa'
 
 const CleanupFeedItem = ({ action }) => {
   console.log(JSON.stringify(action))
-  const { title, date, userName, description, groupSize, location, environmentType, totalItems, totalBags } = action;
+  const { id, title, date, userName, description, groupSize, duration, location, environmentType, totalItems, totalBags } = action;
   
   return (
     <div className="card bg-dark feed-item">
@@ -30,9 +30,9 @@ const CleanupFeedItem = ({ action }) => {
             <FaEdit style={{ color: "#999" }} />
           </button>
           <button>
-            <NavLink to="/" style={{ marginRight: "10px" }}>
+            <Link to="/" style={{ marginRight: "10px" }}>
               <FaTrash style={{ color: "#dc3545" }} />
-            </NavLink>
+            </Link>
           </button>
           <button style={{ height: "1rem" }} onClick={console.log('button clicked')}>
             <FaEllipsisH
@@ -47,10 +47,11 @@ const CleanupFeedItem = ({ action }) => {
       >
         <FaTrash className="icon-primary" />
         <h3
-        //   onClick={handleTitleLink}
+          // onClick={handleTitleLink}
           className="font-md ml-1 title"
           style={{ cursor: "pointer" }}
         >
+          {/* <Link to=`/actions/${id}`>{title}</Link> */}
           {title}
         </h3>
       </div>
