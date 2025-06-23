@@ -9,8 +9,7 @@ const Feed = () => {
   // fetch data when component renders
   useEffect(() => {
     const fetchCleanups = async () => {
-      // const apiUrl = '/api/cleanups';
-      const apiUrl = 'http://localhost:5000/cleanups/'
+      const apiUrl = '/api/cleanups';
       
       try {
         const res = await fetch(apiUrl);
