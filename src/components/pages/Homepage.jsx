@@ -1,11 +1,11 @@
 import React from 'react'
 import Feed from '../Feed'
 import '../../App.css'
-import cleanups from '../../../cleanups.json'
+import actions from '../../../actions.json'
 
 
 const Homepage = () => {
-    console.log('cleanups: ' + JSON.stringify(cleanups))
+    console.log('actions: ' + JSON.stringify(actions))
     
     return (
         <>

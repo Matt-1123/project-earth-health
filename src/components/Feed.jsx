@@ -3,18 +3,18 @@ import CleanupFeedItem from './CleanupFeedItem'
 import Spinner from './Spinner'
 
 const Feed = () => {
-  const [cleanups, setCleanups] = useState([])
+  const [actions, setActions] = useState([])
   const [loading, setLoading] = useState(true);
 
   // fetch data when component renders
   useEffect(() => {
-    const fetchCleanups = async () => {
-      const apiUrl = '/api/cleanups';
+    const fetchActions = async () => {
+      const apiUrl = '/api/actions';
       
       try {
         const res = await fetch(apiUrl);
         const data = await res.json();
-        setCleanups(data);
+        setActions(data);
       } catch (error) {
         console.log('Error fetching data', error);
       } finally {
@@ -22,15 +22,15 @@ const Feed = () => {
       }
     };
 
-    console.log(JSON.stringify(cleanups))
-    fetchCleanups();
+    console.log(JSON.stringify(actions))
+    fetchActions();
   }, []);
 
   return (
     <>
       {loading ? (<Spinner loading={loading}/>) : (
-        cleanups.map((cleanup) => (
-          <CleanupFeedItem key={cleanup.id} action={cleanup} />
+        actions.map((action) => (
+          <CleanupFeedItem key={action.id} action={action} />
         ))
       )}
     </>
