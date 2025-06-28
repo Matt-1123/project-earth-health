@@ -1,5 +1,5 @@
 import { useParams, useLoaderData, useNavigate, Link } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaTrash, FaEdit } from 'react-icons/fa';
 
 const ActionPage = () => {
 
@@ -19,10 +19,22 @@ const ActionPage = () => {
             Save
           </button>
         </div> */}
-        <div className='flex mb-2'>
+        <div className='flex mb-2' style={styles.top}>
           <Link to='/' className='back-link'>
             <FaArrowLeft className='mr' /> Back to Home
           </Link>
+          <div>
+            <button className="mr-1">
+              <Link to={`/edit-action/${action.id}`}>
+                <FaEdit style={{ color: "#999" }} /> Edit
+              </Link>
+            </button>
+            <button>
+              <Link to="/">
+                <FaTrash style={{ color: "#dc3545" }} /> Delete
+              </Link>
+            </button>
+          </div>
         </div>
         <div
           className="grid mb"
@@ -107,6 +119,10 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+  },
+  top: {
+    display: "flex",
+    justifyContent: "space-between",
   }
 };
 
