@@ -1,5 +1,7 @@
 import { useParams, useLoaderData, useNavigate, Link } from 'react-router-dom';
 import { FaArrowLeft, FaTrash, FaEdit } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+
 
 const ActionPage = () => {
 
@@ -26,7 +28,7 @@ const ActionPage = () => {
 
     deleteAction(actionId);
 
-    // toast.success('Action deleted successfully');
+    toast.success('Action deleted successfully');
 
     navigate('/');
   };
