@@ -25,6 +25,13 @@ const App = () => {
   //   });
   //   return;
   // };
+
+  // const deleteAction = async (id) => {
+  //   const res = await fetch (`/api/actions/${id}`, {
+  //     method: 'DELETE',
+  //   })
+  //   return;
+  // }
   
   const router = createBrowserRouter(
     createRoutesFromElements(

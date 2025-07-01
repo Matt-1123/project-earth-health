@@ -3,10 +3,34 @@ import { FaArrowLeft, FaTrash, FaEdit } from 'react-icons/fa';
 
 const ActionPage = () => {
 
+  const navigate = useNavigate();
+
   const { id } = useParams();
   const action = useLoaderData();
   
   console.log("action: " + JSON.stringify(action))
+
+  const deleteAction = async (id) => {
+    const res = await fetch (`/api/actions/${id}`, {
+      method: 'DELETE',
+    })
+    return;
+  }
+  
+  const onDeleteClick = (actionId) => {
+    const confirm = window.confirm(
+      'Are you sure you want to delete this action?'
+    );
+
+    if (!confirm) return;
+
+    deleteAction(actionId);
+
+    // toast.success('Action deleted successfully');
+
+    navigate('/');
+  };
+
 
   return (    
     <>
@@ -29,10 +53,8 @@ const ActionPage = () => {
                 <FaEdit style={{ color: "#999" }} /> Edit
               </Link>
             </button>
-            <button>
-              <Link to="/">
-                <FaTrash style={{ color: "#dc3545" }} /> Delete
-              </Link>
+            <button onClick={() => onDeleteClick(id)}>
+              <FaTrash style={{ color: "#dc3545" }} /> Delete
             </button>
           </div>
         </div>
