@@ -14,6 +14,18 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import AddCleanupPage from './components/pages/AddCleanup';
 
 const App = () => {
+  // Add New Cleanup
+  // const addCleanup = async (newCleanup) => {
+  //   const res = await fetch('/api/actions', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(newCleanup),
+  //   });
+  //   return;
+  // };
+  
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<MainLayout />}>
@@ -22,6 +34,7 @@ const App = () => {
         <Route path='/profile' element={<MyProfilePage />} />
         <Route path='/action/:id' element={<ActionPage />} loader={actionLoader} />
         <Route path='/add-cleanup' element={<AddCleanupPage />} />
+        {/* <Route path='/add-cleanup' element={<AddCleanupPage />} addCleanupSubmit={addCleanup} /> */}
         <Route path='*' element={<NotFoundPage />} />
       </Route>
     )

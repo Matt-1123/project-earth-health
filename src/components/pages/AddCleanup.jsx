@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Select from "react-select";
 import { toast } from 'react-toastify';
 
-const AddCleanupPage = ({ addCleanupSubmit }) => {
+// const AddCleanupPage = ({ addCleanupSubmit }) => {
+const AddCleanupPage = () => {
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('');
     const [description, setDescription] = useState('');
@@ -15,6 +16,17 @@ const AddCleanupPage = ({ addCleanupSubmit }) => {
 
     const navigate = useNavigate();
 
+    const addCleanup = async (newCleanup) => {
+        const res = await fetch('/api/actions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newCleanup),
+        });
+        return;
+    };
+    
     const submitForm = (e) => {
         e.preventDefault();
 
@@ -25,10 +37,13 @@ const AddCleanupPage = ({ addCleanupSubmit }) => {
             location,
             groupSize,
             environmentType,
-            amountCollected
+            totalBagsCollected,
+            totalItemsCollected
         }
 
-        addCleanupSubmit(newCleanup);
+        console.log(newCleanup)
+
+        addCleanup(newCleanup);
 
         toast.success('Cleanup Added Successfully');
 
@@ -100,7 +115,7 @@ const AddCleanupPage = ({ addCleanupSubmit }) => {
                 <div>
                     <label htmlFor="environment-type">Environment Type</label>
                     <Select
-                        styles={styles.option}
+                        styles={customStyles}
                         // defaultInputValue={}
                         onChange={(selectedOption) => {
                         setEnvironmentType(selectedOption.value);
@@ -132,7 +147,7 @@ const AddCleanupPage = ({ addCleanupSubmit }) => {
                         style={styles.number}
                         type="number"
                         name="totalItemsCollected"
-                        value={totalItemsCollected}
+                        // value={totalItemsCollected}
                         onChange={(e) => setTotalItemsCollected(e.target.value)}
                         min="0"
                         max="99999"
@@ -145,7 +160,7 @@ const AddCleanupPage = ({ addCleanupSubmit }) => {
                         style={styles.number}
                         type="number"
                         name="totalBagsCollected"
-                        value={totalBagsCollected}
+                        // value={totalBagsCollected}
                         onChange={(e) => setTotalBagsCollected(e.target.value)}
                         min="0"
                         max="999"
@@ -166,11 +181,14 @@ const AddCleanupPage = ({ addCleanupSubmit }) => {
     );
 };
 
+const customStyles = {
+    option: (provided, state) => ({
+        ...provided,
+        color: "#000",
+    }),
+}
+
 const styles = {
-  option: (provided, state) => ({
-    ...provided,
-    color: "#000",
-  }),
   number: {
     display: "inherit",
     padding: "8px 4px",
