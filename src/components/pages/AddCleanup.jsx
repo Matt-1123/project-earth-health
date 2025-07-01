@@ -8,9 +8,10 @@ const AddCleanupPage = ({ addCleanupSubmit }) => {
     const [date, setDate] = useState('');
     const [description, setDescription] = useState('');
     const [location, setLocation] = useState('');
-    const [groupSize, setGroupSize] = useState('1');
+    const [groupSize, setGroupSize] = useState(1);
     const [environmentType, setEnvironmentType] = useState('');
-    const [amountCollected, setAmountCollected] = useState('');
+    const [totalItemsCollected, setTotalItemsCollected] = useState(null);
+    const [totalBagsCollected, setTotalBagsCollected] = useState(null);
 
     const navigate = useNavigate();
 
@@ -95,17 +96,61 @@ const AddCleanupPage = ({ addCleanupSubmit }) => {
                 />
             </div>
 
-            <div className="form-group">
-                <label htmlFor="environment-type">Environment Type</label>
-                <Select
-                    styles={customStyles}
-                    // defaultInputValue={}
-                    onChange={(selectedOption) => {
-                    setEnvironmentType(selectedOption.value);
-                    }}
-                    options={environmentTypeOptions}
-                    placeholder="Choose an environment type"
-                />
+            <div className="form-group grid-2">
+                <div>
+                    <label htmlFor="environment-type">Environment Type</label>
+                    <Select
+                        styles={styles.option}
+                        // defaultInputValue={}
+                        onChange={(selectedOption) => {
+                        setEnvironmentType(selectedOption.value);
+                        }}
+                        options={environmentTypeOptions}
+                        placeholder="Choose an environment type"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="groupSize">Group Size</label>
+                    <input
+                        id="groupSize"
+                        style={styles.number}
+                        type="number"
+                        name="groupSize"
+                        value={groupSize}
+                        onChange={(e) => setGroupSize(e.target.value)}
+                        min="1"
+                        max="9999"
+                    />
+                </div>
+            </div>
+
+            <div className="form-group grid-2">
+                <div>
+                    <label htmlFor="totalItemsCollected">Total Items Collected</label>
+                    <input
+                        id="totalItemsCollected"
+                        style={styles.number}
+                        type="number"
+                        name="totalItemsCollected"
+                        value={totalItemsCollected}
+                        onChange={(e) => setTotalItemsCollected(e.target.value)}
+                        min="0"
+                        max="99999"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="groupSize">Total Bags Collected</label>
+                    <input
+                        id="totalBagsCollected"
+                        style={styles.number}
+                        type="number"
+                        name="totalBagsCollected"
+                        value={totalBagsCollected}
+                        onChange={(e) => setTotalBagsCollected(e.target.value)}
+                        min="0"
+                        max="999"
+                    />
+                </div>
             </div>
 
             <div>
@@ -121,11 +166,16 @@ const AddCleanupPage = ({ addCleanupSubmit }) => {
     );
 };
 
-const customStyles = {
+const styles = {
   option: (provided, state) => ({
     ...provided,
     color: "#000",
   }),
+  number: {
+    display: "inherit",
+    padding: "8px 4px",
+    minWidth: "120px"
+  }
 };
 
 export default AddCleanupPage;
