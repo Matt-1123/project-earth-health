@@ -51,8 +51,7 @@ const CleanupFeedItem = ({ action }) => {
           className="font-md ml-1 title"
           style={{ cursor: "pointer" }}
         >
-          {/* <Link to=`/actions/${id}`>{title}</Link> */}
-          {title}
+          <Link to={`/action/${id}`}>{title}</Link>
         </h3>
       </div>
       
