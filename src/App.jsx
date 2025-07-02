@@ -12,6 +12,7 @@ import MyProfilePage from './components/pages/MyProfilePage';
 import ActionPage, { actionLoader } from './components/pages/ActionPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import AddCleanupPage from './components/pages/AddCleanup';
+import EditCleanupPage from './components/pages/EditCleanupPage'
 
 const App = () => {
   // Add New Cleanup
@@ -41,7 +42,7 @@ const App = () => {
         <Route path='/profile' element={<MyProfilePage />} />
         <Route path='/action/:id' element={<ActionPage />} loader={actionLoader} />
         <Route path='/add-cleanup' element={<AddCleanupPage />} />
-        {/* <Route path='/add-cleanup' element={<AddCleanupPage />} addCleanupSubmit={addCleanup} /> */}
+        <Route path='/edit-cleanup/:id' element={<EditCleanupPage />} loader={actionLoader} />
         <Route path='*' element={<NotFoundPage />} />
       </Route>
     )

@@ -51,7 +51,7 @@ const ActionPage = () => {
           </Link>
           <div>
             <button className="mr-1">
-              <Link to={`/edit-action/${action.id}`}>
+              <Link to={`/edit-cleanup/${id}`}>
                 <FaEdit style={{ color: "#999" }} /> Edit
               </Link>
             </button>

@@ -32,7 +32,7 @@
     },
     {
       "id": "ff52",
-      "title": "Carroll path cleanup",
+      "title": "Carroll Terrace path cleanup",
       "date": "2025-06-30",
       "description": "Mostly plastic wrappers and bags, some plastic bottles; 20 minutes",
       "location": "Carroll Terrace, Albany, NY USA",
@@ -40,6 +40,17 @@
       "environmentType": "path",
       "totalBagsCollected": "2",
       "totalItemsCollected": "67"
+    },
+    {
+      "id": "7542",
+      "title": "Test",
+      "date": "2025-07-02",
+      "description": "test",
+      "location": "Test location",
+      "groupSize": "2",
+      "environmentType": "",
+      "totalBagsCollected": "1",
+      "totalItemsCollected": "10"
     }
   ]
 }
