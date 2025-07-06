@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 import CleanupFeedItem from './CleanupFeedItem'
 import Spinner from './Spinner'
 
@@ -8,22 +9,36 @@ const Feed = () => {
 
   // fetch data when component renders
   useEffect(() => {
-    const fetchActions = async () => {
-      const apiUrl = '/api/actions';
+    // const fetchActions = async () => {
+    //   const apiUrl = '/api/actions';
       
+    //   try {
+    //     const res = await fetch(apiUrl);
+    //     const data = await res.json();
+    //     setActions(data);
+    //   } catch (error) {
+    //     console.log('Error fetching data', error);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
+
+    // console.log(JSON.stringify(actions))
+    // fetchActions();
+
+    const fetchAllActions = async () => {
       try {
-        const res = await fetch(apiUrl);
-        const data = await res.json();
-        setActions(data);
-      } catch (error) {
-        console.log('Error fetching data', error);
+        const res = await axios.get("http://localhost:8800/cleanups");
+        setActions(res.data);
+      } catch (err) {
+        console.log('Error fetching data', err);
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
     };
+    fetchAllActions();
 
-    console.log(JSON.stringify(actions))
-    fetchActions();
+  console.log(actions);
   }, []);
 
   return (
