@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Select from "react-select";
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 // const AddCleanupPage = ({ addCleanupSubmit }) => {
 const AddCleanupPage = () => {
@@ -16,15 +17,23 @@ const AddCleanupPage = () => {
 
     const navigate = useNavigate();
 
-    const addCleanup = async (newCleanup) => {
-        const res = await fetch('/api/actions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newCleanup),
-        });
-        return;
+    // const addCleanup = async (newCleanup) => {
+    //     const res = await fetch('/api/actions', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(newCleanup),
+    //     });
+    //     return;
+    // };
+
+    const addCleanup = async (cleanup) => {
+        try {
+            await axios.post("http://localhost:8800/cleanups", cleanup);
+        } catch (err) {
+            console.log('Error posting data', err);
+        }
     };
     
     const submitForm = (e) => {
@@ -41,7 +50,7 @@ const AddCleanupPage = () => {
             total_items: totalItemsCollected
         }
 
-        console.log(newCleanup)
+        console.log(`new cleanup: ${newCleanup}`)
 
         addCleanup(newCleanup);
 

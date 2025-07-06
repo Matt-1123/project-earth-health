@@ -20,8 +20,6 @@ const Feed = () => {
       }
     };
     fetchAllActions();
-
-  console.log(actions);
   }, []);
 
   return (
