@@ -35,10 +35,10 @@ const AddCleanupPage = () => {
             date,
             description,
             location,
-            groupSize,
-            environmentType,
-            totalBagsCollected,
-            totalItemsCollected
+            group_size: groupSize,
+            env_type: environmentType,
+            total_bags: totalBagsCollected,
+            total_items: totalItemsCollected
         }
 
         console.log(newCleanup)

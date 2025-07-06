@@ -124,6 +124,7 @@ const AddCleanupPage = () => {
                         setEnvironmentType(selectedOption.value);
                         }}
                         options={environmentTypeOptions}
+                        required
                     />
                 </div>
                 <div>
