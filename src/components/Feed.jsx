@@ -9,23 +9,6 @@ const Feed = () => {
 
   // fetch data when component renders
   useEffect(() => {
-    // const fetchActions = async () => {
-    //   const apiUrl = '/api/actions';
-      
-    //   try {
-    //     const res = await fetch(apiUrl);
-    //     const data = await res.json();
-    //     setActions(data);
-    //   } catch (error) {
-    //     console.log('Error fetching data', error);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-
-    // console.log(JSON.stringify(actions))
-    // fetchActions();
-
     const fetchAllActions = async () => {
       try {
         const res = await axios.get("http://localhost:8800/cleanups");
