@@ -1,11 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash, FaEllipsisH } from 'react-icons/fa'
+import dateConverter from '../utils/dateConverter';
 
 const CleanupFeedItem = ({ action }) => {
   console.log(JSON.stringify(action))
   const { id, title, date, userName, description, group_size, duration, location, env_type, total_items, total_bags } = action;
   
+  const convertDate = (date) => {
+    console.log(date)
+    return date.toLocaleString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})
+  }
+
   return (
     <div className="card bg-dark feed-item">
       <div
@@ -17,7 +23,7 @@ const CleanupFeedItem = ({ action }) => {
         <img src="" alt="" style={styles.avatar} />
         <div style={styles.meta}>
           <p className="font-sm">{userName}</p>
-          <p className="font-sm">{date}</p>
+          <p className="font-sm">{dateConverter(date)}</p>
           {/* <p className="font-sm">{username}</p>
           <p className="font-sm">{dateConverter(date)}</p> */}
         </div>
