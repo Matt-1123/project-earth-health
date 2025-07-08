@@ -86,14 +86,14 @@ const AddCleanupPage = () => {
             
             <div className="form-group">
                 <label htmlFor="description">Description</label>
-                <input
-                    id="description"
-                    type="text"
-                    name="description"
+                <textarea 
+                    name="description" 
+                    id="description" 
                     placeholder="(Optional) Describe your cleanup action"
+                    style={{ maxWidth: '100%', minWidth: '100%', whiteSpace: 'pre-line' }}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                />
+                ></textarea>
             </div>
 
             <div className="form-group">

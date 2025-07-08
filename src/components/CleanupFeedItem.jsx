@@ -54,7 +54,7 @@ const CleanupFeedItem = ({ action }) => {
         </h3>
       </div>
       
-        <p className="font-sm" style={{ marginBottom: ".5em" }}>
+        <p className="font-sm" style={{ marginBottom: ".5em", whiteSpace: 'pre-line' }}>
           {description}
         </p>
       <div style={styles.stats}>
