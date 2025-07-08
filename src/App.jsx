@@ -9,7 +9,8 @@ import MainLayout from './components/layouts/MainLayout';
 import Homepage from './components/pages/Homepage';
 import AboutPage from './components/pages/AboutPage'
 import MyProfilePage from './components/pages/MyProfilePage';
-import ActionPage, { actionLoader } from './components/pages/ActionPage';
+import ActionPage from './components/pages/ActionPage';
+// import ActionPage, { actionLoader } from './components/pages/ActionPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import AddCleanupPage from './components/pages/AddCleanup';
 import EditCleanupPage from './components/pages/EditCleanupPage'
@@ -33,6 +34,8 @@ const App = () => {
   //   })
   //   return;
   // }
+
+  // {/* <Route path='/action/:id' element={<ActionPage />} loader={actionLoader} /> */}
   
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -40,9 +43,9 @@ const App = () => {
         <Route index element={<Homepage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/profile' element={<MyProfilePage />} />
-        <Route path='/action/:id' element={<ActionPage />} loader={actionLoader} />
+        <Route path='/action/:id' element={<ActionPage />} />
         <Route path='/add-cleanup' element={<AddCleanupPage />} />
-        <Route path='/edit-cleanup/:id' element={<EditCleanupPage />} loader={actionLoader} />
+        {/* <Route path='/edit-cleanup/:id' element={<EditCleanupPage />} loader={actionLoader} /> */}
         <Route path='*' element={<NotFoundPage />} />
       </Route>
     )

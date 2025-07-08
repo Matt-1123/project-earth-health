@@ -1,14 +1,23 @@
-import { useParams, useLoaderData, useNavigate, Link } from 'react-router-dom';
+import {useNavigate, Link, useLocation } from 'react-router-dom';
+// import { useParams, useLoaderData, useNavigate, Link } from 'react-router-dom';
 import { FaArrowLeft, FaTrash, FaEdit } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import dateConverter from '../../utils/dateConverter';
 
 
 const ActionPage = () => {
 
+  const locationHook = useLocation()
+  const { action } = locationHook.state
+
   const navigate = useNavigate();
 
-  const { id } = useParams();
-  const action = useLoaderData();
+  const { id, title, date, userName, description, group_size, duration, location, env_type, total_items, total_bags } = action;
+
+  console.log('id', id)
+
+  // const { id } = useParams();
+  // const action = useLoaderData();
   
   console.log("action: " + JSON.stringify(action))
 
@@ -69,57 +78,58 @@ const ActionPage = () => {
           <img src="" alt="" style={styles.avatar} />
           <div style={styles.meta}>
             <p className="font-sm">{action.userName}</p>
-            <p className="font-sm">{action.date}</p>
+            <p className="font-sm">{dateConverter(date)}</p>
           </div>
         </div>
 
         <h1>Action Summary</h1>
         <div className="container-narrow bg-dark">
-          <p>Title: {action.title}</p>
-          {action.description && <p>Description: {action.description}</p>}
-          <p>Date: {action.date}</p>
+          <p>Title: {title}</p>
+          {action.description && <p>Description: {description}</p>}
+          <p>Date: {dateConverter(date)}</p>
         </div>
         <div className="container-narrow bg-dark">
-          Lorem ipsum
+          <p>Group size: {group_size}</p>
+          <p>Environment type: {env_type}</p>
+          <p>Location: {location}</p>
           {/* CO2e prevented:{" "}
           <span className="font-lg text-primary">{carbonPrevented} kg</span> */}
         </div>
-        <div className="grid-2">
-          <div className="card bg-dark">
-            <h3 className="px-1 mb-1">Lorem ipsum</h3>
-            <div className="grid-2" style={{ gridGap: 0 }}>
-              <div style={{ textAlign: "center" }}>
-                <p className="font-lg" style={{ marginBottom: 0 }}>
-                  lorem ipsum
-                </p>
-                <p className="font-sm">dolor</p>
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <p className="font-lg" style={{ marginBottom: 0 }}>
-                  icon
-                </p>
-                <p className="font-sm">Lorem ipsum</p>
-              </div>
+        
+        <div className="container-narrow bg-dark">
+          <h3 className="px-1 mb-1">Impact</h3>
+          <div className="grid-2" style={{ gridGap: 0 }}>
+            <div style={{ textAlign: "center" }}>
+              <p className="font-lg" style={{ marginBottom: 0 }}>
+                {total_bags && (
+                  <div className="text-primary mr">
+                    <p className="font-lg" style={{ marginBottom: "0" }}>
+                      {total_bags}
+                    </p>
+                    <p className="font-md">
+                      Bags collected
+                    </p>
+                  </div>
+                )}
+              </p>
             </div>
-          </div>
-          <div className="card bg-dark">
-            <h3 className="px-1 mb-1">Lorem ipsum</h3>
-            <div className="grid-2" style={{ gridGap: 0 }}>
-              <div style={{ textAlign: "center" }}>
-                <p className="font-lg" style={{ marginBottom: 0 }}>
-                  Lorem ipsum
-                </p>
-                <p className="font-sm">dolor</p>
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <p className="font-lg" style={{ marginBottom: 0 }}>
-                  icon
-                </p>
-                <p className="font-sm">Lorem ipsum</p>
-              </div>
+            <div style={{ textAlign: "center" }}>
+              <p className="font-lg" style={{ marginBottom: 0 }}>
+                {total_items && (
+                  <div className="text-primary mr">
+                    <p className="font-lg" style={{ marginBottom: "0" }}>
+                      {total_items}
+                    </p>
+                    <p className="font-md">
+                      Items collected
+                    </p>
+                  </div>
+                )}
+              </p>
             </div>
           </div>
         </div>
+        
       </div>
     </>
   )

@@ -6,11 +6,6 @@ import dateConverter from '../utils/dateConverter';
 const CleanupFeedItem = ({ action }) => {
   console.log(JSON.stringify(action))
   const { id, title, date, userName, description, group_size, duration, location, env_type, total_items, total_bags } = action;
-  
-  const convertDate = (date) => {
-    console.log(date)
-    return date.toLocaleString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})
-  }
 
   return (
     <div className="card bg-dark feed-item">
@@ -24,8 +19,6 @@ const CleanupFeedItem = ({ action }) => {
         <div style={styles.meta}>
           <p className="font-sm">{userName}</p>
           <p className="font-sm">{dateConverter(date)}</p>
-          {/* <p className="font-sm">{username}</p>
-          <p className="font-sm">{dateConverter(date)}</p> */}
         </div>
         <div
           style={{
@@ -57,7 +50,7 @@ const CleanupFeedItem = ({ action }) => {
           className="font-md ml-1 title"
           style={{ cursor: "pointer" }}
         >
-          <Link to={`/action/${id}`}>{title}</Link>
+          <Link to={`/action/${id}`} state={{ action }}>{title}</Link>
         </h3>
       </div>
       
