@@ -3,7 +3,7 @@ import {useNavigate, Link, useLocation } from 'react-router-dom';
 import { FaArrowLeft, FaTrash, FaEdit } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import dateConverter from '../../utils/dateConverter';
-
+import axios from 'axios';
 
 const ActionPage = () => {
 
@@ -22,10 +22,11 @@ const ActionPage = () => {
   console.log("action: " + JSON.stringify(action))
 
   const deleteAction = async (id) => {
-    const res = await fetch (`/api/actions/${id}`, {
-      method: 'DELETE',
-    })
-    return;
+    try {
+      await axios.delete(`http://localhost:8800/cleanups/${id}`);
+    } catch (err) {
+      console.log(err);
+    }
   }
   
   const onDeleteClick = (actionId) => {
@@ -41,7 +42,6 @@ const ActionPage = () => {
 
     navigate('/');
   };
-
 
   return (    
     <>
