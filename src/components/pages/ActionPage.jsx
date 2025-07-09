@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import {useNavigate, Link, useLocation } from 'react-router-dom';
 // import { useParams, useLoaderData, useNavigate, Link } from 'react-router-dom';
 import { FaArrowLeft, FaTrash, FaEdit } from 'react-icons/fa';
@@ -6,9 +7,29 @@ import dateConverter from '../../utils/dateConverter';
 import axios from 'axios';
 
 const ActionPage = () => {
+  const locationHook = useLocation();
+  // console.log(`useLocation -> ${JSON.stringify(locationHook)}`)
+  // const { action } = locationHook.state;
+  const actionId = locationHook.pathname.split("/")[2];
 
-  const locationHook = useLocation()
-  const { action } = locationHook.state
+  const [action, setAction] = useState([])
+
+  // fetch data when component renders
+  useEffect(() => {    
+    const fetchSingleAction = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8800/cleanups/${actionId}`);
+        console.log('fetched action: ' + JSON.stringify(res.data));
+        setAction(res.data[0]);
+      } catch (err) {
+        console.log('Error fetching data', err);
+      } finally {
+        // setLoading(false)
+      }
+    };
+
+    fetchSingleAction();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -78,15 +99,15 @@ const ActionPage = () => {
           <img src="" alt="" style={styles.avatar} />
           <div style={styles.meta}>
             <p className="font-sm">{action.userName}</p>
-            <p className="font-sm">{dateConverter(date)}</p>
+            {/* <p className="font-sm">{dateConverter(date)}</p> */}
           </div>
         </div>
 
         <h1>Action Summary</h1>
         <div className="container-narrow bg-dark">
-          <p>Title: {title}</p>
+          <p>Title: {action.title}</p>
           {action.description && <p>Description: {description}</p>}
-          <p>Date: {dateConverter(date)}</p>
+          {/* <p>Date: {dateConverter(date)}</p> */}
         </div>
         <div className="container-narrow bg-dark">
           <p>Group size: {group_size}</p>
@@ -100,7 +121,7 @@ const ActionPage = () => {
           <h3 className="px-1 mb-1">Impact</h3>
           <div className="grid-2" style={{ gridGap: 0 }}>
             <div style={{ textAlign: "center" }}>
-              <p className="font-lg" style={{ marginBottom: 0 }}>
+              {/* <p className="font-lg" style={{ marginBottom: 0 }}> */}
                 {total_bags && (
                   <div className="text-primary mr">
                     <p className="font-lg" style={{ marginBottom: "0" }}>
@@ -111,10 +132,10 @@ const ActionPage = () => {
                     </p>
                   </div>
                 )}
-              </p>
+              {/* </p> */}
             </div>
             <div style={{ textAlign: "center" }}>
-              <p className="font-lg" style={{ marginBottom: 0 }}>
+              {/* <p className="font-lg" style={{ marginBottom: 0 }}> */}
                 {total_items && (
                   <div className="text-primary mr">
                     <p className="font-lg" style={{ marginBottom: "0" }}>
@@ -125,7 +146,7 @@ const ActionPage = () => {
                     </p>
                   </div>
                 )}
-              </p>
+              {/* </p> */}
             </div>
           </div>
         </div>
