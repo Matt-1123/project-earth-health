@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash, FaEllipsisH } from 'react-icons/fa'
+import dateConverter from '../utils/dateConverter';
 
 const CleanupFeedItem = ({ action }) => {
   console.log(JSON.stringify(action))
-  const { id, title, date, userName, description, groupSize, duration, location, environmentType, totalItems, totalBags } = action;
-  
+  const { id, title, date, userName, description, group_size, duration, location, env_type, total_items, total_bags } = action;
+
   return (
     <div className="card bg-dark feed-item">
       <div
@@ -17,9 +18,7 @@ const CleanupFeedItem = ({ action }) => {
         <img src="" alt="" style={styles.avatar} />
         <div style={styles.meta}>
           <p className="font-sm">{userName}</p>
-          <p className="font-sm">{date}</p>
-          {/* <p className="font-sm">{username}</p>
-          <p className="font-sm">{dateConverter(date)}</p> */}
+          <p className="font-sm">{dateConverter(date)}</p>
         </div>
         <div
           style={{
@@ -51,39 +50,51 @@ const CleanupFeedItem = ({ action }) => {
           className="font-md ml-1 title"
           style={{ cursor: "pointer" }}
         >
-          {/* <Link to=`/actions/${id}`>{title}</Link> */}
-          {title}
+          <Link to={`/action/${id}`} state={{ action }}>{title}</Link>
         </h3>
       </div>
       
-        <p className="font-sm" style={{ marginBottom: ".5em" }}>
+        <p className="font-sm" style={{ marginBottom: ".5em", whiteSpace: 'pre-line' }}>
           {description}
         </p>
       <div style={styles.stats}>
-        <div className="text-primary mr">
-          <p className="font-sm">
-            Total weight collected
-          </p>
-          <p className="font-md" style={{ lineHeight: "1", marginBottom: "0" }}>
-            3 lbs.
-          </p>
-        </div>
+        {total_bags && (
+          <div className="text-primary mr">
+            <p className="font-sm">
+              Bags collected
+            </p>
+            <p className="font-md" style={{ lineHeight: "1", marginBottom: "0" }}>
+              {total_bags}
+            </p>
+          </div>
+        )}
+        {total_items && (
+          <div className="text-primary mr">
+            <p className="font-sm">
+              Items collected
+            </p>
+            <p className="font-md" style={{ lineHeight: "1", marginBottom: "0" }}>
+              {total_items}
+            </p>
+          </div>
+        )}
+        
         <div className="mr">
           <p className="font-sm">Environment Type</p>
           <p>
-            {environmentType}
+            {env_type}
           </p>
         </div>
         <div className="mr">
           <p className="font-sm">Location</p>
-          <p>
+          <p className='font-sm'>
             {location}
           </p>
         </div>
         <div className="mr">
           <p className="font-sm">Group Size</p>
           <p>
-            {groupSize}
+            {group_size}
           </p>
         </div>
       </div>

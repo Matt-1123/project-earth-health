@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import Feed from '../Feed'
 import '../../App.css'
 import actions from '../../../actions.json'
@@ -20,6 +21,9 @@ const Homepage = () => {
                         {/* <li>
                             <Link to="/add-travel">Travel</Link>
                         </li> */}
+                        <li>
+                            <Link to="/add-cleanup">Cleanup</Link>
+                        </li>
                     </ul>
                 </div>
 

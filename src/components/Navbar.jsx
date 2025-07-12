@@ -5,7 +5,7 @@ import React, {
   useRef,
   useContext,
 } from "react";
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../assets/logos/logo-project-earth-health.png'
 // import PropTypes from "prop-types";
 // import { Link } from "react-router-dom";
@@ -87,9 +87,9 @@ const Navbar = ({ prop1, prop2 }) => {
     <Fragment>
       <header className="bg-primary--dark pt">
         <div className="container navbar grid-2">
-          <NavLink to="/">
+          <Link to="/">
             <img src={logo} alt="Project Earth Health" style={{ width: "auto", height: "48px" }} />
-          </NavLink>
+          </Link>
           <div className="navbar-right">
             <NavLink to="/">
               Home

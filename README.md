@@ -1,4 +1,5 @@
 # Project Earth Health
 
-Fromt Emd: React (Vite)
-Back Emd: Node.js, Express.js, MySQL
+- Front End: React (Vite)
+- Back End: Node.js, Express.js, MySQL
+- Authentication & authorization: TBD (JWT, Clerk, OAuth2.0, etc)

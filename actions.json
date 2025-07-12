@@ -1,54 +1,56 @@
 {
-    "actions": [
-        {
-            "userId": 1,
-            "id": 1,
-            "userName": "Matt Russo",
-            "title": "Community Cleanup",
-            "date": "06172025",
-            "groupSize": 1,
-            "location": "Albany, NY, USA",
-            "environmentType": "trail"
-        },
-        {
-            "userId": 1,
-            "id": 2,
-            "userName": "John Doe",
-            "title": "Community Cleanup",
-            "date": "06172025",
-            "groupSize": 1,
-            "location": "Albany, NY, USA",
-            "environmentType": "trail"
-        },
-        {
-            "userId": 2,
-            "id": 3,
-            "userName": "Matt Russo",
-            "title": "Community Cleanup",
-            "date": "06172025",
-            "groupSize": 1,
-            "location": "Albany, NY, USA",
-            "environmentType": "trail"
-        },
-        {
-            "userId": 1,
-            "id": 4,
-            "userName": "John Doe",
-            "title": "Community Cleanup",
-            "date": "06172025",
-            "groupSize": 1,
-            "location": "Albany, NY, USA",
-            "environmentType": "trail"
-        },
-        {
-            "userId": 3,
-            "id": 5,
-            "userName": "Matt Russo",
-            "title": "Community Cleanup",
-            "date": "06172025",
-            "groupSize": 1,
-            "location": "Albany, NY, USA",
-            "environmentType": "trail"
-        }        
-    ]
+  "actions": [
+    {
+      "userId": 2,
+      "id": "3",
+      "userName": "Matt Russo",
+      "title": "Community Cleanup",
+      "date": "06172025",
+      "groupSize": 1,
+      "location": "Albany, NY, USA",
+      "environmentType": "trail"
+    },
+    {
+      "userId": 1,
+      "id": "4",
+      "userName": "John Doe",
+      "title": "Community Cleanup",
+      "date": "06172025",
+      "groupSize": 1,
+      "location": "Albany, NY, USA",
+      "environmentType": "trail"
+    },
+    {
+      "userId": 3,
+      "id": "5",
+      "userName": "Matt Russo",
+      "title": "Community Cleanup",
+      "date": "06172025",
+      "groupSize": 1,
+      "location": "Albany, NY, USA",
+      "environmentType": "trail"
+    },
+    {
+      "id": "ff52",
+      "title": "Carroll Terrace path cleanup",
+      "date": "2025-06-30",
+      "description": "Mostly plastic wrappers and bags, some plastic bottles; 20 minutes",
+      "location": "Carroll Terrace, Albany, NY USA",
+      "groupSize": 1,
+      "environmentType": "path",
+      "totalBagsCollected": "2",
+      "totalItemsCollected": "67"
+    },
+    {
+      "id": "7542",
+      "title": "Test",
+      "date": "2025-07-02",
+      "description": "test",
+      "location": "Test location",
+      "groupSize": "2",
+      "environmentType": "",
+      "totalBagsCollected": "1",
+      "totalItemsCollected": "10"
+    }
+  ]
 }

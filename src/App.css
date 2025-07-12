@@ -60,6 +60,14 @@ a.title:hover {
   color: var(--primary-color);
 }
 
+a.back-link {
+  color: #666;
+}
+
+a.back-link:hover {
+  color: var(--light-color)
+}
+
 ul {
   list-style: none;
 }
@@ -129,6 +137,10 @@ img {
 
 .text-dark {
   color: var(--dark-color);
+}
+
+.text-light {
+  color: var(--light-color)
 }
 
 .text-center {
