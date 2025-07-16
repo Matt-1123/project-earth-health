@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useMutation} from '@tanstack/react-query';
 import Select from "react-select";
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { postCleanup } from '../../api/actions';
 
 // const AddCleanupPage = ({ addCleanupSubmit }) => {
 const AddCleanupPage = () => {
@@ -17,20 +19,22 @@ const AddCleanupPage = () => {
 
     const navigate = useNavigate();
 
-    // const addCleanup = async (newCleanup) => {
-    //     const res = await fetch('/api/actions', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(newCleanup),
-    //     });
-    //     return;
-    // };
+    // Mutation to post a cleanup
+    // const postCleanupMutation = useMutation({
+    //     mutationFn: () => postCleanup(cleanup),
+    //     onSuccess: () => {
+    //         toast.success('Cleanup Added Successfully');
+    //     },
+    //     onError: (err) => {
+    //         toast.error('Failed to add cleanup');
+    //     },
+    // });
 
     const addCleanup = async (cleanup) => {
         try {
-            await axios.post("http://localhost:8800/cleanups", cleanup);
+            console.log('addCleanup() called')
+            await axios.post('/api/cleanups', cleanup);
+            console.log('post request complete')
         } catch (err) {
             console.log('Error posting data', err);
         }
@@ -50,10 +54,12 @@ const AddCleanupPage = () => {
             total_items: totalItemsCollected
         }
 
-        console.log(`new cleanup: ${newCleanup}`)
+        console.log(`new cleanup: ${JSON.stringify(newCleanup)}`)
+
+        // postCleanupMutation.mutate(newCleanup);
+        // console.log('mutation complete to post cleanup')
 
         addCleanup(newCleanup);
-
         toast.success('Cleanup Added Successfully');
 
         return navigate('/');

@@ -2,12 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import Feed from '../Feed'
 import '../../App.css'
-import actions from '../../../actions.json'
 
-
-const Homepage = () => {
-    console.log('actions: ' + JSON.stringify(actions))
-    
+const Homepage = () => {    
     return (
         <>
             <div className="container grid-2-5-2 mt-2 mb-2" style={{ alignItems: "start" }}>

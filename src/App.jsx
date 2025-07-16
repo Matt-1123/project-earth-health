@@ -15,8 +15,7 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import AddCleanupPage from './components/pages/AddCleanup';
 import EditCleanupPage from './components/pages/EditCleanupPage'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import axios from 'axios';
-import cors from 'cors';
+import { getActions } from './api/actions'
 
 const posts = [
   {id: 1, title: "Post 1"},
@@ -27,55 +26,20 @@ const wait = duration => {
   return new Promise(resolve => setTimeout(resolve, duration))
 }
 
-const App = () => {
-  const queryClient = useQueryClient();
-  
-  const actionsQuery = useQuery({
-    queryKey: ['actions'],
-    // queryFn: () => wait(5000).then(() => [...posts])
-    // queryFn: () => Promise.reject("error message")
-    queryFn: async () => {
-      try {
-        const res = await axios.get('/api/cleanups');
-        // setActions(res.data);
-        console.log(JSON.stringify(res.data))
-        return res.data
-      } catch (err) {
-        console.log('Error fetching data', err);
-      } finally {
-        // setLoading(false)
-        console.log("fetchAllActions complete")
-      }
-    }
-  });
-  
-  // const actiodnsQuery = useQuery({
-  //   queryKey: ["actions"],
+const App = () => {  
+  // const actionsQuery = useQuery({
+  //   queryKey: ['actions'],
+  //   staleTime: 5000,
+  //   refetchInterval: 10000,
   //   // queryFn: () => wait(5000).then(() => [...posts])
   //   // queryFn: () => Promise.reject("error message")
-  //   queryFn: () => {
-  //     const fetchAllActions = async () => {
-        // try {
-        //   const res = await axios.get("http://localhost:8800/cleanups");
-        //   // setActions(res.data);
-        //   console.log(JSON.stringify(res.data))
-        //   return res.data
-        // } catch (err) {
-        //   console.log('Error fetching data', err);
-        // } finally {
-        //   // setLoading(false)
-        //   console.log("fetchAllActions complete")
-        // }
-  //     };
-    
-  //     fetchAllActions();
-  //   }
-  // })
+  //   queryFn: getActions
+  // });
 
-  console.log(`actionsQuery.fetchStatus: ${actionsQuery.fetchStatus}`)
-  console.log(`actionsQuery.status: ${actionsQuery.status}`)
-  if(actionsQuery.isLoading) return <h1>Loading...</h1>
-  if(actionsQuery.isError) return <pre>{JSON.stringify(actionsQuery.error)}</pre>
+  // console.log(`actionsQuery.fetchStatus: ${actionsQuery.fetchStatus}`)
+  // console.log(`actionsQuery.status: ${actionsQuery.status}`)
+  // if(actionsQuery.isLoading) return <h1>Loading...</h1>
+  // if(actionsQuery.isError) return <pre>{JSON.stringify(actionsQuery.error)}</pre>
 
   // const newActionMutation = useMutation({
   //   mutationFn: () => {
@@ -100,17 +64,18 @@ const App = () => {
     )
   );
 
-  return (
-    <div>
-      <p>test</p>
-      {posts.map((action) => (
-        <div key={action.id}>
-          <p>{action.title}</p>
-        </div>
-      ))}
-    </div>
-  )
-  // return <RouterProvider router={router} />;
+  // return (
+  //   <div>
+  //     <p>test</p>
+  //     {posts.map((action) => (
+  //       <div key={action.id}>
+  //         <p>{action.title}</p>
+  //       </div>
+  //     ))}
+  //   </div>
+  // )
+  
+  return <RouterProvider router={router} />;
 }
 
 export default App

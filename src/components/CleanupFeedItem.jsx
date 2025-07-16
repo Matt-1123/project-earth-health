@@ -4,7 +4,6 @@ import { FaEdit, FaTrash, FaEllipsisH } from 'react-icons/fa'
 import dateConverter from '../utils/dateConverter';
 
 const CleanupFeedItem = ({ action }) => {
-  console.log(JSON.stringify(action))
   const { id, title, date, userName, description, group_size, duration, location, env_type, total_items, total_bags } = action;
 
   return (
@@ -25,15 +24,15 @@ const CleanupFeedItem = ({ action }) => {
             display: "inline-block",
           }}
         >
-          <button style={{ marginRight: "10px" }}>
+          {/* <button style={{ marginRight: "10px" }}>
             <FaEdit style={{ color: "#999" }} />
           </button>
           <button>
             <Link to="/" style={{ marginRight: "10px" }}>
               <FaTrash style={{ color: "#dc3545" }} />
             </Link>
-          </button>
-          <button style={{ height: "1rem" }} onClick={console.log('button clicked')}>
+          </button> */}
+          <button style={{ height: "1rem" }}>
             <FaEllipsisH
               style={{ color: "#555", justifySelf: "end" }}
             />
