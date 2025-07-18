@@ -4,7 +4,7 @@ import {useMutation} from '@tanstack/react-query';
 import Select from "react-select";
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { postCleanup } from '../../api/actions';
+// import { postCleanup } from '../../api/actions';
 
 // const AddCleanupPage = ({ addCleanupSubmit }) => {
 const AddCleanupPage = () => {
@@ -60,13 +60,22 @@ const AddCleanupPage = () => {
         // console.log('mutation complete to post cleanup')
 
         addCleanup(newCleanup);
+        // postCleanup(newCleanup)
+        
+        console.log('before setTimeout')
+        setTimeout(() => {
+            // Code to be executed after 1 second
+            console.log("This message appears after 5 seconds.");
+        }, 5000);
+        console.log('after setTimeout')
+
         toast.success('Cleanup Added Successfully');
 
         return navigate('/');
     };
 
     const environmentTypeOptions = [
-        { value: "", label: "Select an environment type" },
+        { value: "", label: "Select an environment type", disabled: true },
         { value: "path", label: "Path" },
         { value: "park", label: "Park" },
         { value: "beach", label: "Beach" },
@@ -133,10 +142,11 @@ const AddCleanupPage = () => {
                         styles={customStyles}
                         // defaultInputValue={}
                         onChange={(selectedOption) => {
-                        setEnvironmentType(selectedOption.value);
+                            setEnvironmentType(selectedOption.value);
                         }}
                         options={environmentTypeOptions}
                         placeholder="Choose an environment type"
+                        required={true}
                     />
                 </div>
                 <div>

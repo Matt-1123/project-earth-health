@@ -24,20 +24,21 @@ export const getAction = async (id) => {
 }
 
 export const postCleanup = async (cleanup) => {
-    try {
-        await axios.post('/api/cleanups', cleanup);
-        console.log('posted cleanup')
-        return true;
-    } catch (err) {
-        console.log('Error posting data', err);
-    }
-    // const response = await fetch('/api/cleanups', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(newTodo),
-    // });
-    // if (!response.ok) {
-    //     throw new Error('Failed to add cleanup');
+    // try {
+    //     await axios.post('/api/cleanups', cleanup);
+    //     console.log('posted cleanup')
+    //     return true;
+    // } catch (err) {
+    //     console.log('Error posting data', err);
     // }
-    // return response.json();
+    
+    const response = await fetch('/api/cleanups', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cleanup),
+    });
+    if (!response.ok) {
+        console.error('Failed to add cleanup');
+    }
+    return;    
 }

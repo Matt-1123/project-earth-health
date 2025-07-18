@@ -14,7 +14,7 @@ const CleanupFeedItem = ({ action }) => {
           gridTemplateColumns: "42px 1fr auto",
         }}
       >
-        <img src="" alt="" style={styles.avatar} />
+        <img src={null} alt="" style={styles.avatar} />
         <div style={styles.meta}>
           <p className="font-sm">{userName}</p>
           <p className="font-sm">{dateConverter(date)}</p>
