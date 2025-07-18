@@ -28,7 +28,7 @@ const ActionPage = () => {
 
   const deleteAction = async (id) => {
     try {
-      await axios.delete(`http://localhost:8800/cleanups/${id}`);
+      await axios.delete(`/api/cleanups/${id}`);
     } catch (err) {
       console.log(err);
     }
