@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Select from "react-select";
 import { toast } from 'react-toastify';
 import Spinner from '../Spinner';
@@ -7,30 +7,55 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { getAction } from '../../api/actions';
 
-// const AddCleanupPage = ({ addCleanupSubmit }) => {
-const AddCleanupPage = () => {
+const EditCleanupPage = () => {
     const navigate = useNavigate();
     const locationHook = useLocation();
     const actionId = locationHook.pathname.split("/")[2];
 
-    const { data, isLoading, isError, error, refetch } = useQuery({
-      queryKey: ['action', actionId],
-      queryFn: () => getAction(actionId)
-    });
+    // const { data, isPending, isError, error, refetch, fetchStatus, status } = useQuery({
+    //   queryKey: ['action', actionId],
+    //   queryFn: () => getAction(actionId)
+    // });
+    // const [action, setAction] = useState({})
+    const [loading, setLoading] = useState(true);
+    const [formData, setFormData] = useState({
+        title: '',
+        date: '',
+        description: '',
+        location: '',
+        groupSize: 1,
+        environmentType: '',
+        totalBagsCollected: '',
+        totalItemsCollected: ''
+    })
 
-    console.log(`data from useQuery: ${JSON.stringify(data)}`)
-    
-    // TODO: use localStorage to populate dropdowns (environmentType)
-    const [title, setTitle] = useState(data.title);
-    const [date, setDate] = useState(data.date);
-    const [description, setDescription] = useState(data.description);
-    const [location, setLocation] = useState(data.location);
-    const [groupSize, setGroupSize] = useState(data.group_size);
-    const [environmentType, setEnvironmentType] = useState(data.env_type);
-    const [totalItemsCollected, setTotalItemsCollected] = useState(data.total_items);
-    const [totalBagsCollected, setTotalBagsCollected] = useState(data.total_bags);
+    useEffect(() => {    
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`/api/cleanups/${actionId}`);
+                console.log(`GET /api/cleanups/[id]: ${JSON.stringify(res.data)}`)
+                const {id, title, date, userName, description, group_size, duration, location, env_type, total_items, total_bags} = res.data[0];
+                
+                setFormData({
+                    ...formData,
+                    title: title,
+                    [date]: date,
+                    [description]: description,
+                    [location]: location,
+                    [groupSize]: group_size,
+                    [environmentType]: env_type,
+                    [totalBagsCollected]: total_bags,
+                    [totalItemsCollected]: total_items
+                })
+            } catch (err) {
+                console.error('Error fetching data', err);
+            } finally {
+                setLoading(false)
+            }
+        };
 
-    const { id } = useParams();
+        fetchData();
+    }, []);
     
     const updateAction = async (action) => {
         const res = await fetch(`/api/actions/${actionId}`, {
@@ -77,11 +102,17 @@ const AddCleanupPage = () => {
         return isoTimestamp.split('T')[0];
     } 
 
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+    }
+
     return (
         <>
-            {isLoading && <Spinner loading={isLoading} />}
-            {isError && <p>Error fetching data</p>}
-            {data && (
+            {loading && <Spinner loading={loading} />}
+            {!loading && (   
                 <form className="container-narrow bg-dark" onSubmit={submitForm}>
                     <h2 className="text-primary font-lg">Cleanup Action</h2>
                     
@@ -92,8 +123,8 @@ const AddCleanupPage = () => {
                             type="text"
                             name="title"
                             placeholder="Cleanup Title"
-                            value={data.title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            value={formData.title}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -105,8 +136,8 @@ const AddCleanupPage = () => {
                             type="text"
                             name="description"
                             placeholder="(Optional) Describe your cleanup action"
-                            value={data.description} 
-                            onChange={(e) => setDescription(e.target.value)}
+                            value={formData.description} 
+                            onChange={handleChange}
                         />
                     </div>
 
@@ -116,8 +147,9 @@ const AddCleanupPage = () => {
                             id="date"
                             type="date"
                             name="date"
-                            value={dateOnlyConversion(data.date)}
-                            onChange={(e) => setDate(e.target.value)}
+                            // value={formData.date !== '' ? dateOnlyConversion(date) : ''}
+                            value={formData.date}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -128,8 +160,8 @@ const AddCleanupPage = () => {
                             id="location"
                             type="text"
                             name="location"
-                            value={data.location}
-                            onChange={(e) => setLocation(e.target.value)}
+                            value={formData.location}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -139,9 +171,12 @@ const AddCleanupPage = () => {
                             <label htmlFor="environment-type">Environment Type</label>
                             <Select
                                 styles={customStyles}
-                                defaultInputValue={data.env_type}
+                                defaultInputValue={formData.environmentType}
                                 onChange={(selectedOption) => {
-                                    setEnvironmentType(selectedOption.value);
+                                    setFormData({
+                                        ...formData,
+                                        environmentType: selectedOption.value
+                                    })
                                 }}
                                 options={environmentTypeOptions}
                                 required
@@ -154,8 +189,8 @@ const AddCleanupPage = () => {
                                 style={styles.number}
                                 type="number"
                                 name="groupSize"
-                                value={data.group_size}
-                                onChange={(e) => setGroupSize(e.target.value)}
+                                value={formData.groupSize}
+                                onChange={handleChange}
                                 min="1"
                                 max="9999"
                             />
@@ -170,8 +205,8 @@ const AddCleanupPage = () => {
                                 style={styles.number}
                                 type="number"
                                 name="totalItemsCollected"
-                                value={data.total_items}
-                                onChange={(e) => setTotalItemsCollected(e.target.value)}
+                                value={formData.totalItemsCollected}
+                                onChange={handleChange}
                                 min="0"
                                 max="99999"
                             />
@@ -183,8 +218,8 @@ const AddCleanupPage = () => {
                                 style={styles.number}
                                 type="number"
                                 name="totalBagsCollected"
-                                value={data.total_bags}
-                                onChange={(e) => setTotalBagsCollected(e.target.value)}
+                                value={formData.totalBagsCollected}
+                                onChange={handleChange}
                                 min="0"
                                 max="999"
                             />
@@ -201,7 +236,7 @@ const AddCleanupPage = () => {
 
                     <p className="font-sm">* required</p>
                 </form>
-            )}
+            )} 
         </>
     )
 };
@@ -221,4 +256,4 @@ const styles = {
   }
 };
 
-export default AddCleanupPage;
+export default EditCleanupPage;
