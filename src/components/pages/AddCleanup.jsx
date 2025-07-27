@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {useMutation} from '@tanstack/react-query';
 import Select from "react-select";
@@ -18,6 +18,13 @@ const AddCleanupPage = () => {
     const [totalBagsCollected, setTotalBagsCollected] = useState(null);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // Focus the title input when the component mounts
+        inputRef.current.focus();
+    }, []);
+    
+    const inputRef = useRef(null);
 
     // Mutation to post a cleanup
     // const postCleanupMutation = useMutation({
@@ -96,6 +103,7 @@ const AddCleanupPage = () => {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required
+                    ref={inputRef}
                 />
             </div>
             
