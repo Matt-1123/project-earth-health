@@ -7,7 +7,7 @@ export const getActions = async () => {
     } catch (err) {
         console.log('Error fetching data', err);
     } finally {
-        console.log("queryFn for all actions complete")
+        console.log("getActions complete")
     }
 }
 

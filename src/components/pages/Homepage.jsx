@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Feed from '../Feed'
 import '../../App.css'
 
-const Homepage = () => {    
+const Homepage = ({ actions }) => {    
     return (
         <>
             <div className="container grid-2-5-2 mt-2 mb-2" style={{ alignItems: "start" }}>
@@ -24,7 +24,7 @@ const Homepage = () => {
                 </div>
 
                 <div>
-                    <Feed />
+                    <Feed actions={actions} />
                 </div>
 
                 <div className="container">

@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 import { getActions } from '../api/actions'
 // import { useFetchActions } from '../state/useFetchActions.js'
 
-const Feed = () => {  
+const Feed = ({ actions }) => {  
   const { data, isLoading, isError, error, fetchStatus, status } = useQuery({
     queryKey: ['actions'],
     staleTime: 5000,
@@ -15,6 +15,8 @@ const Feed = () => {
     // queryFn: () => Promise.reject("error message")
     queryFn: getActions
   });
+
+  console.log(`Feed.jsx actions prop: ${JSON.stringify(actions)}`)
 
   console.log(`actionsQuery.fetchStatus: ${fetchStatus}`)
   console.log(`actionsQuery.status: ${status}`)
