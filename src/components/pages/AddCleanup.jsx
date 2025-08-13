@@ -21,7 +21,9 @@ const AddCleanupPage = () => {
 
     useEffect(() => {
         // Focus the title input when the component mounts
-        inputRef.current.focus();
+        if(inputRef.current) {
+            inputRef.current.focus();
+        }
     }, []);
     
     const inputRef = useRef(null);

@@ -24,7 +24,7 @@ const Homepage = ({ actions }) => {
                 </div>
 
                 <div>
-                    <Feed actions={actions} />
+                    <Feed />
                 </div>
 
                 <div className="container">

@@ -1,30 +1,38 @@
 import { useState, useEffect } from 'react'
 import {useNavigate, Link, useLocation } from 'react-router-dom';
-// import { useParams, useLoaderData, useNavigate, Link } from 'react-router-dom';
+// import { useParams, useLoaderaction, useNavigate, Link } from 'react-router-dom';
 import { FaArrowLeft, FaTrash, FaEdit } from 'react-icons/fa';
 import Spinner from '../Spinner';
 import { toast } from 'react-toastify';
 import dateConverter from '../../utils/dateConverter';
 import axios from 'axios';
-import { useQuery } from "@tanstack/react-query"
-import { getAction } from '../../api/actions'
 
-const ActionPage = () => {
+const ActionPage = ({cleanup}) => {
   const navigate = useNavigate();
   const locationHook = useLocation();
   const actionId = locationHook.pathname.split("/")[2];
 
-  const { data, isLoading, isError, error, refetch } = useQuery({
-      queryKey: ['action', actionId],
-      staleTime: 5000,
-      refetchInterval: 10000,
-      // queryFn: () => wait(5000).then(() => [...posts])
-      // queryFn: () => Promise.reject("error message")
-      queryFn: () => getAction(actionId)
-    });
-  // }, []);
-  
-  console.log("action: " + JSON.stringify(data))
+  const [action, setAction] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchAction = async () => {
+      try {
+        const res = await fetch(`/api/cleanups/${actionId}`);
+        if (!res.ok) throw new Error('Failed to fetch action');
+        const action = await res.json();
+        setAction(action);
+        console.log('action: ', action)
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAction();
+  }, []);
 
   const deleteAction = async (id) => {
     try {
@@ -48,11 +56,13 @@ const ActionPage = () => {
     navigate('/');
   };
 
+  // const { id, title, date, description, group_size, location, env_type, total_items, total_bags } = action[0] || {};
+
   return (    
     <>
-      {isLoading && <Spinner loading={isLoading} />}
-      {isError && <p>Error fetching data</p>}
-      {data && (
+      {loading && <Spinner loading={loading} />}
+      {error && <p>Error fetching action: {error.message}</p>}
+      {action && (
         <div className="container-narrow">
           {/* <div className="grid-2 my-2">
             <button className="btn btn-light" onClick={handleDelete}>
@@ -68,11 +78,11 @@ const ActionPage = () => {
             </Link>
             <div>
               <button className="mr-1">
-                <Link to={`/edit-cleanup/${data.id}`}>
+                <Link to={`/edit-cleanup/${actionId}`}>
                   <FaEdit style={{ color: "#999" }} /> Edit
                 </Link>
               </button>
-              <button onClick={() => onDeleteClick(data.id)}>
+              <button onClick={() => onDeleteClick(actionId)}>
                 <FaTrash style={{ color: "#dc3545" }} /> Delete
               </button>
             </div>
@@ -85,21 +95,21 @@ const ActionPage = () => {
           >
             <img src="" alt="" style={styles.avatar} />
             <div style={styles.meta}>
-              <p className="font-sm">{data.userName}</p>
+              {/* <p className="font-sm">{userName}</p> */}
               {/* <p className="font-sm">{dateConverter(date)}</p> */}
             </div>
           </div>
 
           <h1>Action Summary</h1>
           <div className="container-narrow bg-dark">
-            <p>Title: {data.title}</p>
-            {data.description && <p>Description: {data.description}</p>}
+            <p>Title: {action[0]['title']}</p>
+            {description && <p>Description: {action.description}</p>}
             {/* <p>Date: {dateConverter(date)}</p> */}
           </div>
           <div className="container-narrow bg-dark">
-            <p>Group size: {data.group_size}</p>
-            <p>Environment type: {data.env_type}</p>
-            <p>Location: {data.location}</p>
+            <p>Group size: {group_size}</p>
+            <p>Environment type: {env_type}</p>
+            <p>Location: {location}</p>
             {/* CO2e prevented:{" "}
             <span className="font-lg text-primary">{carbonPrevented} kg</span> */}
           </div>
@@ -109,10 +119,10 @@ const ActionPage = () => {
             <div className="grid-2" style={{ gridGap: 0 }}>
               <div style={{ textAlign: "center" }}>
                 {/* <p className="font-lg" style={{ marginBottom: 0 }}> */}
-                  {data.total_bags && (
+                  {total_bags && (
                     <div className="text-primary mr">
                       <p className="font-lg" style={{ marginBottom: "0" }}>
-                        {data.total_bags}
+                        {total_bags}
                       </p>
                       <p className="font-md">
                         Bags collected
@@ -123,29 +133,24 @@ const ActionPage = () => {
               </div>
               <div style={{ textAlign: "center" }}>
                 {/* <p className="font-lg" style={{ marginBottom: 0 }}> */}
-                  {data.total_items && (
+                  {total_items && (
                     <div className="text-primary mr">
                       <p className="font-lg" style={{ marginBottom: "0" }}>
-                        {data.total_items}
+                        {total_items}
                       </p>
                       <p className="font-md">
                         Items collected
                       </p>
                     </div>
                   )}
-                {/* </p> */}
               </div>
             </div>
           </div>
-          
         </div>
       )}
     </>
   )
 }
-
-
-
 
 const styles = {
   avatar: {
